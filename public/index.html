@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head prefix="og: http://ogp.me/ns">
+    <meta charset="utf-8">
+    <title>マルチインフォメーション</title>
+    <meta name="description" content="マルチインフォメーション" />
+    <meta property="og:url" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="マルチインフォメーション" />
+    <meta property="og:site_name" content="マルチインフォメーション" />
+    <meta property="og:description" content="マルチインフォメーション" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./js/api.js"></script>
+  </head>
+  <body>
+    <main>
+        <div>
+          <div class = "width_box" >
+            <div id = "weather_info_main">
+              <div>
+                <div>
+                  <p id = "today_date" >n月n日（n）</p>
+                  <img id = "today_weather_icon" class = "shadow" src="./img/forecasts/000.svg" alt="">
+                  <div class = "temp_box">
+                    <p id = "today_temp">
+                      <span id = "today_temp_max" class = "temp_max temp_l">--</span><span class = "temp_max temp_unit">°C</span>
+                      <span class = "temp">/</span>
+                      <span id = "today_temp_min" class = "temp_min temp_s">--</span><span class = "temp_min temp_unit">°C</span>
+                    </p>
+                  </div>
+                  <table id = "today_pops" class = "pops_table" >
+                    <tr>
+                      <th> 6時 - 12時</th>
+                      <th>12時 - 18時</th>
+                      <th>18時 - 24時</th>
+                    </tr>
+                    <tr>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                  </table>
+                </div>
+                <div>
+                  <div id = "warnings_box">
+                    <p>- 発令中の警報・注意報 -</p>
+                    <div id = "warnings"></div>
+                  </div>
+                  <div>
+                    <p id = "tomorrow_date" >n月n日（n）</p>
+                    <img id = "tomorrow_weather_icon" class = "shadow" src="./img/forecasts/000.svg" alt="">
+                    <div class = "temp_box">
+                      <p id = "tomorrow_temp">
+                        <span id = "tomorrow_temp_max" class = "temp_max temp_l">--</span><span class = "temp_max temp_unit">°C</span>
+                        <span class = "temp">/</span>
+                        <span id = "tomorrow_temp_min" class = "temp_min temp_s">--</span><span class = "temp_min temp_unit">°C</span>
+                      </p>
+                    </div>
+                    <table id = "tomorrow_pops" class = "pops_table" >
+                      <tr>
+                        <th> 0時 - 12時</th>
+                        <th>12時 - 24時</th>
+                      </tr>
+                      <tr>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id = "air_into_main" >
+              <p>空調稼働状況</p>
+              <img src="./img/air/off.png">
+              <div>
+                <span class = "air_status_label" >電源：</span><span class = "air_status" >--</span>
+                <span class = "air_status_label" >温度：</span><span class = "air_status" >--</span>
+                <span class = "air_status_label" >風速：</span><span class = "air_status" >--</span>
+                <span class = "air_status_label" >風向：</span><span class = "air_status" >--</span>
+              </div>
+            </div>
+          </div>
+          <div id = "monitor_info_main">
+            <p>ただいまの環境状況</p>
+            <div>
+              <div>
+                <div id = "temp_box">
+                  <span class = "temp_unit">温度：</span><span id = "monitor_temp" class = "temp_l">--</span><span class = "temp_unit">°C</span>
+                </div>
+                <div id = "hum_box">
+                  <span class = "hum_unit">湿度：</span><span id = "monitor_hum" class = "hum_l">--</span><span class = "hum_unit">%</span>
+                </div>
+              </div>
+              <div>
+                <div id = "THI_box">
+                  <span class = "thi_unit">不快指数：</span><span id = "monitor_THI" class = " thi_l">--</span>
+                  <span class = "attn_box">　</span>
+                </div>
+                <div id = "WBGT_box">
+                  <span class = "wbgt_unit">ＷＢＧＴ：</span><span id = "monitor_WBGT" class = "wbgt_l">--</span>
+                  <span class = "attn_box">　</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button id = "ir_test">IRテスト</button>
+    </main>
+
+    <footer>
+        <small>©Copyright 2025, hirayu, All rights reserved.</small>
+    </footer>
+    <script type="text/javascript" src="./js/main.js"></script>
+  </body>
+</html>
