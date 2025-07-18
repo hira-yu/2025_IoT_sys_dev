@@ -1,245 +1,471 @@
+/* === Base and General Styles === */
 body {
     margin: 0;
-    background-color: #f5f5f7;
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
 }
 
 main {
-    margin-bottom: 60px;
-    padding: 5px;
-}
-
-main, footer {
-    text-align: center;
+    padding: 20px;
+    margin-bottom: 70px;
 }
 
 footer {
-    display: grid;
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
     height: 50px;
-    background-color: #f5f5f7;
-	place-items: center center;
+    display: grid;
+    place-items: center;
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    font-size: 1.2rem;
+    color: #6c757d;
 }
-
-footer p {
-    margin: 0;
-}
-
 
 img {
-    vertical-align: top;
+    max-width: 100%;
+    vertical-align: middle;
 }
 
-
-#today_date, #tomorrow_date {
-    margin: 0;
-    font-size: 28px;
-    font-weight: bold;
-}
-#tomorrow_date {
-    font-size: 20px;
-}
-
-.width_box {
-    display: flex;
-    justify-content: space-around;
-}
-
-#weather_info_main, #air_into_main, #monitor_info_main {
-    border-radius: 50px;
-    border: 2px solid #000;
+/* === Layout === */
+.container-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
     margin-bottom: 20px;
 }
-#weather_info_main, #air_into_main {
-    width: calc( 50% - 10px );
-}
-#monitor_info_main {
-    width: calc( 100% - 10px );
-}
 
-#air_into_main > img {
-    width: 40%;
-}
-
-#weather_info_main > div {
-    margin: auto;
+/* === Card Styles === */
+.card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e9ecef;
     display: flex;
+    flex-direction: column;
     text-align: center;
-    justify-content: center;
-    padding: 10px;
-    width: calc( 100% - 20px );
 }
 
-#weather_info_main > div > div:nth-of-type( 1 ) {
-    width: 60%;
+.card-title {
+    font-size: 2.25rem;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    color: #212529;
 }
-#weather_info_main > div > div:nth-of-type( 2 ) {
-    width: 40%;
+
+/* === Weather Info Card === */
+.weather-info-card {
+    grid-column: 1 / -4;
+    justify-content: center;
+}
+.weather-info-card .weather-content {
+    display: flex;
+    gap: 25px;
+    align-items: flex-end;
+}
+.weather-info-card .today-forecast {
+	flex: 3;
+}
+.weather-info-card .forecast-details {
+    flex: 2;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-
-#today_weather_icon {
-    width: 80%;
+.date-heading {
+    margin: 0 0 10px 0;
+    font-size: 2.8rem;
+    font-weight: 500;
+}
+.date-heading.tomorrow {
+	font-size: 2.2rem;
+}
+.weather-icon {
+    width: 420px;
+    margin: 10px auto;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+.weather-icon.tomorrow {
+	width: 180px;
+}
+.temp-display {
+	margin: 10px 0;
+	font-weight: 300;
+}
+.temp-max {
+	font-size: 6.8rem;
+	color: #e53e3e;
+	font-weight: 600;
+}
+.temp-min {
+	font-size: 4.8rem;
+	color: #3182ce;
+	font-weight: 500;
+}
+.temp-separator {
+    font-size: 2rem;
+    margin: 0 10px;
+    color: #adb5bd;
+}
+.temp-unit {
+    font-size: 3rem;
+    color: #6c757d;
+    margin-left: 4px;
 }
 
-#tomorrow_weather_icon {
-    width: 55%;
-}
-
-.temp_l + .temp_unit {
-    font-size: 35px;
-}
-.temp_s + .temp_unit {
-    font-size: 20px;
-}
-
-.temp_box > p {
-    margin: 0;
-    line-height: 40px;
-}
-
-#today_temp > .temp_l {
-    font-size: 80px;
-}
-#tomorrow_temp > .temp_l, #today_temp > .temp_s {
-    font-size: 60px;
-}
-.temp, #tomorrow_temp > .temp_s {
-    font-size: 40px;
-}
-
-.temp_max {
-    color: #FF3409;
-}
-
-.temp_min {
-    color: #2521FF;
-}
-
-.pops_table {
-    margin: auto;
-    width: 90%;
+/* PoPs Table */
+.pops-table {
+    width: 100%;
     border-collapse: collapse;
+    margin-top: 15px;
+}
+.pops-table th, .pops-table td {
+    border: 1px solid #e9ecef;
+    padding: 8px;
+    font-size: 1.6rem;
+}
+.pops-table th {
+    background-color: #f8f9fa;
+	font-weight: 50
+    ;
 }
 
-.pops_table th, .pops_table td {
-    width: 30%;
-    padding: 5px;
-    font-size: 20px;
-    border: 1.5px solid #000;
-}
-
-#warnings_box {
+/* Warnings Box */
+.warnings-box {
+    border: 1px solid #ffeeba;
+    background-color: #fffcf1;
+    border-radius: 12px;
+    padding: 15px;
     height: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1.5px solid black;
-    border-radius: 40px;
+    margin-bottom: 15px;
 }
-
-#warnings_box, .waring_label {
-    font-size: 24px;
+.warnings-title {
+    margin: 0 0 10px 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #856404;
 }
-
-#warnings_box > p {
-    margin: 0 0 10px;
-    font-size: 28px;
+.warnings-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
-
-#warnings {
-    text-align: left;
-    font-size: 0;
-}
-
-.waring_label {
-    display: inline-block;
-    margin: 0 5px 8px;
-    padding: 6px 12px;
-    border-radius: 8px;
+.warning-label {
+    margin: 0;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 .level_0 {
-    background-color: #FF2800;
-    font-weight: bolder;
-    color: white;
+	background-color: #dc3545;
+	color: white;
 }
 .level_1, .level_2 {
-    background-color: #F2E700;
+	background-color: #ffc107;
+	color: #212529;
 }
 .level_3 {
-    background-color: #0C000C;
-    font-weight: bolder;
-    color: white;
+	background-color: #343a40;
+	color: white;
 }
 
-#monitor_info_main > p,
-#air_into_main > p {
-    font-size: 40px;
-    margin: 0;
+/* === Air Info Card === */
+.air-info-card {
+    justify-content: center;
+    align-items: center;
+    grid-column: -4 / -2;
+}
+.air-status-img {
+    width: 320px;
+    margin-bottom: 25px;
+}
+.air-status-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 12px 20px;
+    font-size: 2rem;
+    text-align: left;
+    width: fit-content;
+    margin: 0 auto;
+}
+.air-status-label {
+	font-weight: 500;
+	color: #495057;
+	text-align: right;
+}
+.air-status-value {
+	font-weight: 600;
+	color: #212529;
 }
 
-#monitor_info_main > div {
+/* === Air Remote Card === */
+.air-remote-card {
+    justify-content: flex-start;
+}
+.remote-body {
+    width: 100%;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    gap: 15px;
+    transition: opacity 0.3s;
 }
-
-#THI_box,
-#WBGT_box {
+.remote-section {
+    border-top: 1px solid #e9ecef;
+    padding-top: 15px;
+}
+.remote-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #495057;
+    margin: 0 0 10px 0;
     text-align: left;
 }
-
-#temp_box > span.temp_l,
-#hum_box > span.hum_l,
-#THI_box > span.thi_l,
-#WBGT_box > span.wbgt_l,
-.air_status {
-    font-size: 80px;
+.remote-btn-group {
+    display: grid;
+    grid-template-columns: repeat( 4, 1fr );
+    gap: 10px;
 }
-#temp_box > span.temp_unit,
-#hum_box > span.hum_unit,
-#THI_box > span.thi_unit,
-#WBGT_box > span.wbgt_unit,
-.air_status_label {
-    font-size: 50px;
+.remote-btn {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 10px 5px;
+    min-height: 50px;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.remote-btn.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+.remote-btn:disabled {
+    cursor: not-allowed;
+    background-color: #e9ecef;
+    color: #adb5bd;
 }
 
+/* Power Button */
+.power-btn {
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+}
+.power-btn.active {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.5);
+}
+
+/* Temp Control */
+.temp-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.temp-control .temp-widget {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.temp-control .temp-display {
+    font-size: 2.2rem;
+    font-weight: 600;
+    min-width: 60px;
+    text-align: center;
+}
+.temp-control .temp-btn {
+    font-size: 1.5rem;
+    width: 45px;
+    height: 45px;
+    line-height: 1;
+    border-radius: 50%;
+}
+
+/* Submit Button */
+.submit-btn {
+    margin-top: 10px;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+.submit-btn:hover:not(:disabled) {
+    background-color: #218838;
+}
+
+/* Tooltip for icons */
+.remote-btn[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #343a40;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s;
+}
+.remote-btn[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.btn-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.wind-dir-group,
+.wind-power-group {
+    grid-template-columns: repeat( 3, 1fr );
+}
+
+.remote-label-second {
+    margin-top: 15px;
+}
+
+/* === Monitor Info Card === */
+.monitor-info-card {
+	grid-column: 1 / -1;
+}
+.monitor-info-card .monitor-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+.monitor-item {
+	text-align: center;
+}
+.monitor-label {
+	font-size: 2rem;
+	color: #6c757d;
+	margin: 0 0 5px 0;
+}
+.monitor-value-wrapper {
+	margin: 0;
+    padding: 1.2rem;
+    border-radius: 1rem;
+}
+.monitor-value {
+	font-size: 5.5rem;
+	font-weight: 600;
+	line-height: 0.8;
+}
+.monitor-unit {
+	font-size: 3rem;
+	font-weight: 400;
+	color: #495057;
+}
+
+/* Attention Box */
 .attn_box {
-    padding: 4px 16px;
+    padding: 6px 20px;
     border-radius: 30px;
-    border: 2px #000 solid;
-    margin: 10px;
+    border: 2px solid transparent;
+    margin: 10px 0 0 0;
     display: inline-block;
-    font-size: 70px;
+    font-size: 1.1rem;
+    font-weight: 500;
 }
-.attn_0 {
-    background-color: #0020E6;
-    color: #DDD;
+.attn_0, .attn_1 {
+	background-color: #ebf8ff;
+	color: #2c5282;
+	border-color: #bee3f8;;
 }
-.attn_1 {
-    background-color: #0041E6;
-    color: #DDD;
+.attn_2, .attn_3 {
+	background-color: #f0fff4;
+	color: #2f855a;
+	border-color: #9ae6b4;
 }
-.attn_2 {
-    background-color: #0096E6;
+.attn_4, .attn_5 {
+	background-color: #fffaf0;
+	color: #dd6b20;
+	border-color: #fbd38d;
 }
-.attn_3 {
-    background-color: #b9ebE6;
-}
-.attn_4 {
-    background-color: #ffffE6;
-}
-.attn_5 {
-    background-color: #ffffE6;
-}
-.attn_6 {
-    background-color: #faf5E6;
-}
-.attn_7 {
-    background-color: #ff99E6;
+.attn_6, .attn_7 {
+	background-color: #fff5f5;
+	color: #c53030;
+	border-color: #feb2b2;
 }
 .attn_8 {
-    background-color: #ff28E6;
+	background-color: #fed7e2;
+	color: #97266d;
+	border-color: #fbb6ce;
+}
+
+
+/* === IR Test Button === */
+#ir_test {
+    display: block;
+    margin: 20px auto 0;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+#ir_test:hover {
+    background-color: #0069d9;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.5);
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 992px) {
+    .weather-info-card .weather-content {
+	    flex-direction: column;
+    }
+}
+@media (max-width: 768px) {
+    .container-grid {
+	grid-template-columns: 1fr;
+}
+    .card-title {
+	font-size: 1.5rem;
+}
+    .monitor-content {
+	flex-direction: column;
+	align-items: center;
+}
+    .temp-max {
+	font-size: 3.2rem;
+}
+    .temp-min {
+	font-size: 2.2rem;
+}
+    .monitor-value {
+	font-size: 3.8rem;
+}
 }

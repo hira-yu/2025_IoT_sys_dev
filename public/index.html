@@ -1,119 +1,175 @@
 <!DOCTYPE html>
 <html lang="ja" dir="ltr">
-  <head prefix="og: http://ogp.me/ns">
+<head>
     <meta charset="utf-8">
     <title>マルチインフォメーション</title>
     <meta name="description" content="マルチインフォメーション" />
-    <meta property="og:url" content="" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="マルチインフォメーション" />
-    <meta property="og:site_name" content="マルチインフォメーション" />
-    <meta property="og:description" content="マルチインフォメーション" />
-    <meta name="twitter:card" content="summary_large_image">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/main.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./js/api.js"></script>
-  </head>
-  <body>
-    <main>
-        <div>
-          <div class = "width_box" >
-            <div id = "weather_info_main">
-              <div>
-                <div>
-                  <p id = "today_date" >n月n日（n）</p>
-                  <img id = "today_weather_icon" class = "shadow" src="./img/forecasts/000.svg" alt="">
-                  <div class = "temp_box">
-                    <p id = "today_temp">
-                      <span id = "today_temp_max" class = "temp_max temp_l">--</span><span class = "temp_max temp_unit">°C</span>
-                      <span class = "temp">/</span>
-                      <span id = "today_temp_min" class = "temp_min temp_s">--</span><span class = "temp_min temp_unit">°C</span>
-                    </p>
-                  </div>
-                  <table id = "today_pops" class = "pops_table" >
-                    <tr>
-                      <th> 6時 - 12時</th>
-                      <th>12時 - 18時</th>
-                      <th>18時 - 24時</th>
-                    </tr>
-                    <tr>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>-</td>
-                    </tr>
-                  </table>
-                </div>
-                <div>
-                  <div id = "warnings_box">
-                    <p>- 発令中の警報・注意報 -</p>
-                    <div id = "warnings"></div>
-                  </div>
-                  <div>
-                    <p id = "tomorrow_date" >n月n日（n）</p>
-                    <img id = "tomorrow_weather_icon" class = "shadow" src="./img/forecasts/000.svg" alt="">
-                    <div class = "temp_box">
-                      <p id = "tomorrow_temp">
-                        <span id = "tomorrow_temp_max" class = "temp_max temp_l">--</span><span class = "temp_max temp_unit">°C</span>
-                        <span class = "temp">/</span>
-                        <span id = "tomorrow_temp_min" class = "temp_min temp_s">--</span><span class = "temp_min temp_unit">°C</span>
-                      </p>
+</head>
+<body>
+<main>
+    <div class="container-grid">
+        <div id="weather_info_main" class="card weather-info-card">
+            <div class="weather-content">
+                <div class="today-forecast">
+                    <p id="today_date" class="date-heading">n月n日（n）</p>
+                    <img id="today_weather_icon" class="weather-icon" src="./img/forecasts/000.svg" alt="今日の天気アイコン">
+                    <div class="temp-display">
+                        <span id="today_temp_max" class="temp-max">--</span><span class="temp-unit">°C</span>
+                        <span class="temp-separator">/</span>
+                        <span id="today_temp_min" class="temp-min">--</span><span class="temp-unit">°C</span>
                     </div>
-                    <table id = "tomorrow_pops" class = "pops_table" >
-                      <tr>
-                        <th> 0時 - 12時</th>
-                        <th>12時 - 24時</th>
-                      </tr>
-                      <tr>
-                        <td>-</td>
-                        <td>-</td>
-                      </tr>
+                    <table id="today_pops" class="pops-table">
+                        <tr><th>6-12時</th><th>12-18時</th><th>18-24時</th></tr>
+                        <tr><td>-</td><td>-</td><td>-</td></tr>
                     </table>
-                  </div>
                 </div>
-              </div>
+                <div class="forecast-details">
+                    <div id="warnings_box" class="warnings-box">
+                        <p class="warnings-title">- 発令中の警報・注意報 -</p>
+                        <div id="warnings" class="warnings-content"></div>
+                    </div>
+                    <div class="tomorrow-forecast">
+                        <p id="tomorrow_date" class="date-heading tomorrow">n月n日（n）</p>
+                        <img id="tomorrow_weather_icon" class="weather-icon tomorrow" src="./img/forecasts/000.svg" alt="明日の天気アイコン">
+                        <div class="temp-display">
+                            <span id="tomorrow_temp_max" class="temp-max">--</span><span class="temp-unit">°C</span>
+                            <span class="temp-separator">/</span>
+                            <span id="tomorrow_temp_min" class="temp-min">--</span><span class="temp-unit">°C</span>
+                        </div>
+                        <table id="tomorrow_pops" class="pops-table">
+                            <tr><th>0-12時</th><th>12-24時</th></tr>
+                            <tr><td>-</td><td>-</td></tr>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div id = "air_into_main" >
-              <p>空調稼働状況</p>
-              <img src="./img/air/off.png">
-              <div>
-                <span class = "air_status_label" >電源：</span><span class = "air_status" >--</span>
-                <span class = "air_status_label" >温度：</span><span class = "air_status" >--</span>
-                <span class = "air_status_label" >風速：</span><span class = "air_status" >--</span>
-                <span class = "air_status_label" >風向：</span><span class = "air_status" >--</span>
-              </div>
-            </div>
-          </div>
-          <div id = "monitor_info_main">
-            <p>ただいまの環境状況</p>
-            <div>
-              <div>
-                <div id = "temp_box">
-                  <span class = "temp_unit">温度：</span><span id = "monitor_temp" class = "temp_l">--</span><span class = "temp_unit">°C</span>
-                </div>
-                <div id = "hum_box">
-                  <span class = "hum_unit">湿度：</span><span id = "monitor_hum" class = "hum_l">--</span><span class = "hum_unit">%</span>
-                </div>
-              </div>
-              <div>
-                <div id = "THI_box">
-                  <span class = "thi_unit">不快指数：</span><span id = "monitor_THI" class = " thi_l">--</span>
-                  <span class = "attn_box">　</span>
-                </div>
-                <div id = "WBGT_box">
-                  <span class = "wbgt_unit">ＷＢＧＴ：</span><span id = "monitor_WBGT" class = "wbgt_l">--</span>
-                  <span class = "attn_box">　</span>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-        <button id = "ir_test">IRテスト</button>
-    </main>
 
-    <footer>
-        <small>©Copyright 2025, hirayu, All rights reserved.</small>
-    </footer>
-    <script type="text/javascript" src="./js/main.js"></script>
-  </body>
+        <div id="air_into_main" class="card air-info-card">
+            <h2 class="card-title">空調稼働状況</h2>
+            <img id="air_status_img" class="air-status-img" src="./img/air/off.png" alt="エアコンの状態">
+            <div class="air-status-grid">
+                <span class="air-status-label">電源：</span><span id="power" class="air-status-value">--</span>
+                <span class="air-status-label">温度：</span><span class="air-status-value"><span id="temp">--</span>°C</span>
+                <span class="air-status-label">風速：</span><span id="wind_power" class="air-status-value">--</span>
+                <span class="air-status-label">風向上下：</span><span id="wind_dir_v" class="air-status-value">--</span>
+                <span class="air-status-label">風向左右：</span><span id="wind_dir_s" class="air-status-value">--</span>
+            </div>
+        </div>
+
+        <div id="air_remote_main" class="card air-remote-card">
+            <h2 class="card-title">エアコン操作</h2>
+            <div class="remote-body">
+                <div class="remote-section">
+                    <button id="remote_power" class="remote-btn power-btn" data-tooltip="電源ON/OFF">
+                        <i class="fa-solid fa-power-off"></i>
+                        <span class="btn-text">電源</span>
+                    </button>
+                </div>
+                <div class="remote-section">
+                    <p class="remote-label">運転モード</p>
+                    <div id="remote_mode" class="remote-btn-group">
+                        <button class="remote-btn mode-btn" data-mode="auto" data-tooltip="自動">
+                            <span class="btn-text">自動</span>
+                        </button>
+                        <button class="remote-btn mode-btn" data-mode="cool" data-tooltip="冷房">
+                            <span class="btn-text">冷房</span>
+                        </button>
+                        <button class="remote-btn mode-btn" data-mode="dry" data-tooltip="除湿">
+                            <span class="btn-text">除湿</span>
+                        </button>
+                        <button class="remote-btn mode-btn" data-mode="heat" data-tooltip="暖房">
+                            <span class="btn-text">暖房</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="remote-section temp-control">
+                    <p class="remote-label">設定温度</p>
+                    <div class="temp-widget">
+                        <button id="remote_temp_down" class="remote-btn temp-btn">-</button>
+                        <span id="remote_temp_display" class="temp-display">--</span>
+                        <button id="remote_temp_up" class="remote-btn temp-btn">+</button>
+                    </div>
+                </div>
+                <div class="remote-section">
+                    <p class="remote-label">風量</p>
+                    <div id="remote_wind_power" class="remote-btn-group wind-power-group">
+                        <button class="remote-btn wind-btn" data-wind="auto">自動</button>
+                        <button class="remote-btn wind-btn" data-wind="silent">静か</button>
+                        <button class="remote-btn wind-btn" data-wind="1">弱</button>
+                        <button class="remote-btn wind-btn" data-wind="2">中</button>
+                        <button class="remote-btn wind-btn" data-wind="4">強</button>
+                        <button class="remote-btn wind-btn" data-wind="powerful">パワフル</button>
+                    </div>
+                </div>
+
+                <div class="remote-section">
+                    <p class="remote-label">風向（上下）</p>
+                    <div id="remote_wind_dir_v" class="remote-btn-group wind-dir-group">
+                        <button class="remote-btn wind-dir-v-btn" data-wind-v="auto">自動</button>
+                        <button class="remote-btn wind-dir-v-btn" data-wind-v="1">最上</button>
+                        <button class="remote-btn wind-dir-v-btn" data-wind-v="2">上</button>
+                        <button class="remote-btn wind-dir-v-btn" data-wind-v="3">中央</button>
+                        <button class="remote-btn wind-dir-v-btn" data-wind-v="4">下</button>
+                        <button class="remote-btn wind-dir-v-btn" data-wind-v="5">最下</button>
+                    </div>
+                    <p class="remote-label remote-label-second">風向（左右）</p>
+                    <div id="remote_wind_dir_s" class="remote-btn-group wind-dir-group">
+                        <button class="remote-btn wind-dir-s-btn" data-wind-s="auto">自動</button>
+                        <button class="remote-btn wind-dir-s-btn" data-wind-s="1">最左</button>
+                        <button class="remote-btn wind-dir-s-btn" data-wind-s="2">左</button>
+                        <button class="remote-btn wind-dir-s-btn" data-wind-s="3">中央</button>
+                        <button class="remote-btn wind-dir-s-btn" data-wind-s="4">右</button>
+                        <button class="remote-btn wind-dir-s-btn" data-wind-s="5">最右</button>
+                    </div>
+                </div>
+                <button id="remote_submit" class="remote-section remote-btn submit-btn">
+                    <i class="fa-solid fa-paper-plane"></i>送信
+                </button>
+            </div>
+        </div>
+
+        <div id="monitor_info_main" class="card monitor-info-card">
+            <h2 class="card-title">ただいまの環境状況</h2>
+            <div class="monitor-content">
+                <div class="monitor-item">
+                    <p class="monitor-label">温度</p>
+                    <p class="monitor-value-wrapper">
+                        <span id="monitor_temp" class="monitor-value">--</span><span class="monitor-unit">°C</span>
+                    </p>
+                </div>
+                <div class="monitor-item">
+                    <p class="monitor-label">湿度</p>
+                    <p class="monitor-value-wrapper">
+                        <span id="monitor_hum" class="monitor-value">--</span><span class="monitor-unit">%</span>
+                    </p>
+                </div>
+                <div class="monitor-item">
+                    <p class="monitor-label">不快指数</p>
+                    <p id="THI_box" class="monitor-value-wrapper">
+                        <span id="monitor_THI" class="monitor-value">--</span>
+                    </p>
+                </div>
+                <div class="monitor-item">
+                    <p class="monitor-label">ＷＢＧＴ</p>
+                    <p id="WBGT_box" class="monitor-value-wrapper">
+                        <span id="monitor_WBGT" class="monitor-value">--</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+    <small>©Copyright 2025, hirayu, All rights reserved.</small>
+</footer>
+<script type="text/javascript" src="./js/main.js"></script>
+</body>
 </html>
